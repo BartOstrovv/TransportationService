@@ -19,7 +19,7 @@ public class UserController {
         return service.get(id);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public List<UserDto> getAll() {
         return service.getAll();

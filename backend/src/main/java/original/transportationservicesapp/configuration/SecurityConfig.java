@@ -30,14 +30,15 @@ public class SecurityConfig {
                 .antMatchers("/api/auth/login").permitAll()
                 .antMatchers("/api/auth/logout").permitAll()
                 .antMatchers("/api/auth/transporter/signup").permitAll()
-                .antMatchers("/api/auth/customer/signup").permitAll()
-                .anyRequest().authenticated());
+                .antMatchers("/api/auth/customer/signup").permitAll());
+                // TODO: Uncomment when security will be implemented
+               // .anyRequest().authenticated());
         http.csrf().disable().cors()
                 .and()
                 .logout().logoutUrl("/api/auth/logout")
                 .logoutSuccessHandler(logoutSuccess)
                 .and()
-                .sessionManagement().maximumSessions(1);;
+                .sessionManagement().maximumSessions(1);
         return  http.build();
     }
 
