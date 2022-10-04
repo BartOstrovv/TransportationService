@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {User} from "./api/models/User";
-import {UserHttpService} from "./api/services/user-http.service";
+import {User} from "@api/models/User";
+import {UserHttpService} from "@api/services/user-http.service";
 import {first} from "rxjs";
 
 @Component({
