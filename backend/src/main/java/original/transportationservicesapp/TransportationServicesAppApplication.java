@@ -1,4 +1,4 @@
-package backend.original.transportationservicesapp;
+package original.transportationservicesapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

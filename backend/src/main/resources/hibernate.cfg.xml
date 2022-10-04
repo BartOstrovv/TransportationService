@@ -4,7 +4,7 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.url">
-            jdbc:postgresql://localhost:5432/transportationServicesDB</property>
+            jdbc:postgresql://localhost:5432/transportationsDB</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">root</property>
         <property name="hibernate.connection.pool_size">10</property>

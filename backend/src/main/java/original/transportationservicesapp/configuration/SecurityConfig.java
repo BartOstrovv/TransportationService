@@ -35,7 +35,9 @@ public class SecurityConfig {
         http.csrf().disable().cors()
                 .and()
                 .logout().logoutUrl("/api/auth/logout")
-                .logoutSuccessHandler(logoutSuccess);
+                .logoutSuccessHandler(logoutSuccess)
+                .and()
+                .sessionManagement().maximumSessions(1);;
         return  http.build();
     }
 
