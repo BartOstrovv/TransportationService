@@ -4,7 +4,8 @@ import {MainLayoutComponent} from "@modules/main/layout/main-layout.component";
 const routes: Routes = [
   { path: "", component: MainLayoutComponent,
   children: [
-    {path: "", redirectTo: "login", pathMatch: "full"},
+    {path: "", loadChildren: ()=>import('./components/dashboard/dashboard.component')
+        .then(m=>m.DashboardModule)},
     {path: "login", loadChildren: ()=>import('./components/login/login.component')
         .then(m=>m.LoginModule)},
 

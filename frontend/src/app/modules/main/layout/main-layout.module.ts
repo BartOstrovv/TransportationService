@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import {MainLayoutComponent} from "@modules/main/layout/main-layout.component";
 import {RouterModule} from "@angular/router";
 import { MainHeaderComponent } from './main-header/main-header.component';
+import {AvatarModule} from "primeng/avatar";
+import {MenuModule} from "primeng/menu";
 
 
 
@@ -13,7 +15,9 @@ import { MainHeaderComponent } from './main-header/main-header.component';
   ],
   imports: [
     RouterModule,
-    CommonModule
+    CommonModule,
+    AvatarModule,
+    MenuModule
   ]
 })
 export class MainLayoutModule { }
