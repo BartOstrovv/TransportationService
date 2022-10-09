@@ -1,5 +1,6 @@
 import {Component, NgModule, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
+import {RouterModule} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
     LoginComponent
   ],
   imports: [
+    RouterModule.forChild([{path: "", component: LoginComponent}]),
     CommonModule
   ]
 })
