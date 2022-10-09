@@ -6,6 +6,7 @@
     "paths": {
       "@api/*": ["app/api/*"],
       "@config/*": ["app/config/*"],
+      "@modules/*": ["app/modules/*"],
       "@env/*": ["environments"]
 
     },
