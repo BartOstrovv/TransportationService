@@ -21,17 +21,18 @@ public class AuthorizeService {
     private final Mapper mapper;
     private final PasswordEncoder encoder;
 
-    public ProfileDto signupAsTransporter(RegistrationTransporterDto dto) {
-        dto.setPassword(encoder.encode(dto.getPassword()));
-        var tr = repoTransporter.save(mapper.toTransporter(dto));
-        var profile = mapper.toProfileDto(tr);
-        profile.setFullName(tr.getLogo() + " -> Owner(" + tr.getFirstName() + " " + tr.getLastName() + ")");
+    public ProfileDto signupAsTransporter(RegistrationTransporterDto registrationDto) {
+        registrationDto.setPassword(encoder.encode(registrationDto.getPassword()));
+        var transporter = repoTransporter.save(mapper.toTransporter(registrationDto));
+        var profile = mapper.toProfileDto(transporter);
+        profile.setFullName(transporter.getLogo() + 
+                " -> Owner(" + transporter.getFirstName() + " " + transporter.getLastName() + ")");
         return profile;
     }
 
-    public ProfileDto signupAsCustomer(RegistrationCustomerDto dto) {
-        dto.setPassword(encoder.encode(dto.getPassword()));
-        var customer = repoCustomer.save(mapper.toCustomer(dto));
+    public ProfileDto signupAsCustomer(RegistrationCustomerDto registrationDto) {
+        registrationDto.setPassword(encoder.encode(registrationDto.getPassword()));
+        var customer = repoCustomer.save(mapper.toCustomer(registrationDto));
         var profile = mapper.toProfileDto(customer);
         profile.setFullName(customer.getFirstName() + " " + customer.getLastName());
         return profile;

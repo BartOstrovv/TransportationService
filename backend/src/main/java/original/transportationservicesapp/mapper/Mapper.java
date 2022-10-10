@@ -59,4 +59,6 @@ public interface Mapper {
     ProfileDto toProfileDto(User entity);
 
     CustomerDtoShort toCustomerDtoShort(Customer entity);
+
+    SecurityUserDto toSecurityUserDto(User entity);
 }

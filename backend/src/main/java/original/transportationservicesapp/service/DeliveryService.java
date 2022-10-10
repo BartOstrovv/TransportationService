@@ -27,9 +27,10 @@ import java.util.stream.Collectors;
 public class DeliveryService {
     private final DeliveryRepo deliveryRepo;
     private final OfferRepo offerRepo;
-    private final TransporterRepo transporterRepo;
     private final CustomerRepo customerRepo;
     private final Mapper mapper;
+
+    private final SecurityService securityService;
 
     public DeliveryDto get(Long id) {
         return mapper.toDeliveryDto(retrieve(id));
@@ -40,17 +41,15 @@ public class DeliveryService {
     }
 
     public DeliveryDto create(DeliveryDto dto) {
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        Customer cm = customerRepo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email));
-        dto.setCustomer(mapper.toCustomerDtoShort(cm));
+        Customer customer = (Customer) securityService.getCurrentUser();
+        dto.setCustomer(mapper.toCustomerDtoShort(customer));
         return mapper.toDeliveryDto(deliveryRepo.save(mapper.toDelivery(dto)));
     }
 
     public DeliveryDto offer(Long id, Double price) {
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        Transporter tr = transporterRepo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email));
+        Transporter transporter = (Transporter) securityService.getCurrentUser();
         Delivery delivery = retrieve(id);
-        offerRepo.save(Offer.of(price, tr, delivery));
+        offerRepo.save(Offer.of(price, transporter, delivery));
         if (DeliveryStatus.afterAccepted().contains(delivery.getStatus()))
             throw new DeliveryAlreadyHaveFinalOfferException("Delivery", delivery.getId());
         if (delivery.getStatus() == DeliveryStatus.CREATED)
@@ -105,7 +104,7 @@ public class DeliveryService {
 
     public List<DeliveryDto> getAllByCustomer() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        Customer cm = customerRepo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email));
-        return cm.getDeliveries().stream().map(mapper::toDeliveryDto).collect(Collectors.toList());
+        Customer customer = (Customer) securityService.getCurrentUser();
+        return customer.getDeliveries().stream().map(mapper::toDeliveryDto).collect(Collectors.toList());
     }
 }

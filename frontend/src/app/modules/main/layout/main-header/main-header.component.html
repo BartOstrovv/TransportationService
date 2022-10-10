@@ -3,7 +3,6 @@
 </div>
 
 <div class="header-right">
-  <!--<p-avatar [icon]="(securityService.isAuthenticated$ | async) ? 'pi pi-user' : 'pi pi-question'" shape="circle" (click)="userMenu.toggle($event)"></p-avatar>-->
-  <p-avatar [icon]="'pi pi-user'" shape="circle" (click)="userMenu.toggle($event)"></p-avatar>
+  <p-avatar [icon]="(securityService.isAuthenticated$ | async) ? 'pi pi-user' : 'pi pi-question'" shape="circle" (click)="userMenu.toggle($event)"></p-avatar>
   <p-menu #userMenu [popup]="true" [model]="userMenuItems"></p-menu>
 </div>

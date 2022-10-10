@@ -7,6 +7,7 @@ import org.hibernate.annotations.DiscriminatorOptions;
 import original.transportationservicesapp.enums.Role;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.ZonedDateTime;
 
 @Entity
@@ -17,7 +18,7 @@ import java.time.ZonedDateTime;
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "role")
 @DiscriminatorOptions(force=true)
 @Table(name = "users")
-public class User {
+public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

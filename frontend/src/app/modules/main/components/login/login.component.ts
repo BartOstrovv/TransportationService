@@ -5,6 +5,7 @@ import {FormsModule} from "@angular/forms";
 import {ButtonModule} from "primeng/button";
 import {AuthHttpService} from "@api/services/auth-http.service";
 import {first} from "rxjs";
+import {InputTextModule} from "primeng/inputtext";
 
 @Component({
   selector: 'app-login',
@@ -47,6 +48,7 @@ export class LoginComponent implements OnInit {
     RouterModule.forChild([{path: "", component: LoginComponent}]),
     CommonModule,
     FormsModule,
+    InputTextModule,
     ButtonModule
   ]
 })
