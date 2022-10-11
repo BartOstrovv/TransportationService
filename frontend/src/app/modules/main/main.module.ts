@@ -6,6 +6,8 @@ import {MainLayoutModule} from "@modules/main/layout/main-layout.module";
 
 @NgModule({
   declarations: [
+
+
   ],
   imports: [
     routing,

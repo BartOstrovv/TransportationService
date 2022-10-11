@@ -12,12 +12,12 @@ export class SecurityService {
   public isAuthenticated$ = this._isAuthenticated$.asObservable();
 
   constructor(private router: Router) {
+    this._isAuthenticated$.next(this.isAuthenticated());
   }
 
   login(user: SecurityUser) {
     this.updateUserInLocalStorage(user)
     this._isAuthenticated$.next(true)
-    this.router.navigate(["/shop"])
   }
 
   logout() {

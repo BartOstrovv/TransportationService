@@ -34,7 +34,7 @@ export class MainHeaderComponent implements OnInit {
     this.authHttpService.logout()
       .pipe(first())
       .subscribe({
-        next: () => console.log("Logout"),//this.securityService.logout(),
+        next: () => this.securityService.logout(),
         error: error => console.log(error)
       })
   }
@@ -45,7 +45,7 @@ export class MainHeaderComponent implements OnInit {
         label: 'Login',
         icon: 'fa-solid fa-right-to-bracket',
         routerLink: '/login',
-        visible: !this.securityService.isAuthenticated()
+        visible: !isAuthenticated
       },
       {
         label: 'Admin panel',
@@ -57,7 +57,7 @@ export class MainHeaderComponent implements OnInit {
         label: 'Logout',
         icon: 'fa-solid fa-right-from-bracket',
         command: () => this.logout(),
-        visible: this.securityService.isAuthenticated()
+        visible: isAuthenticated
       }
     ];
   }

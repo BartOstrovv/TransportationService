@@ -1,8 +1,11 @@
 package original.transportationservicesapp.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import original.transportationservicesapp.dto.DeliveryDto;
 import original.transportationservicesapp.entity.Customer;
@@ -17,7 +20,6 @@ import original.transportationservicesapp.mapper.Mapper;
 import original.transportationservicesapp.repository.CustomerRepo;
 import original.transportationservicesapp.repository.DeliveryRepo;
 import original.transportationservicesapp.repository.OfferRepo;
-import original.transportationservicesapp.repository.TransporterRepo;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,8 +38,8 @@ public class DeliveryService {
         return mapper.toDeliveryDto(retrieve(id));
     }
 
-    public List<DeliveryDto> getAll() {
-        return deliveryRepo.findAll().stream().map(mapper::toDeliveryDto).collect(Collectors.toList());
+    public Page<DeliveryDto> getAll(Pageable pageable) {
+        return deliveryRepo.findAll(pageable).map(mapper::toDeliveryDto);
     }
 
     public DeliveryDto create(DeliveryDto dto) {
@@ -102,9 +104,11 @@ public class DeliveryService {
         return mapper.toDeliveryDto(deliveryRepo.save(delivery));
     }
 
-    public List<DeliveryDto> getAllByCustomer() {
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        Customer customer = (Customer) securityService.getCurrentUser();
-        return customer.getDeliveries().stream().map(mapper::toDeliveryDto).collect(Collectors.toList());
+    public Page<DeliveryDto> getAllByCustomer(Pageable pageable) {
+        //Customer customer = (Customer) securityService.getCurrentUser();
+
+        //Customer customer = customerRepo.findByEmail(securityService.getCurrentUserEmail()).orElseThrow(() -> new EntityNotFoundException());
+        //List<DeliveryDto> list = customer.getDeliveries().stream().map(mapper::toDeliveryDto).collect(Collectors.toList());
+        return deliveryRepo.findByCustomerId(securityService.getCurrentUser().getId(), pageable).map(mapper::toDeliveryDto);
     }
 }

@@ -3,6 +3,7 @@ package original.transportationservicesapp.service;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import original.transportationservicesapp.entity.Customer;
 import original.transportationservicesapp.entity.User;
 import original.transportationservicesapp.security.CustomUserDetails;
 
@@ -13,12 +14,12 @@ public class SecurityService {
         return getAuthentication().getName();
     }
 
-    public CustomUserDetails getCurrentUserDetails() {
-        return (CustomUserDetails) getAuthentication().getDetails();
+    public CustomUserDetails getCurrentUserPrincipals() {
+        return (CustomUserDetails) getAuthentication().getPrincipal();
     }
 
     public User getCurrentUser() {
-        return getCurrentUserDetails().getUser();
+        return getCurrentUserPrincipals().getUser();
     }
 
     private Authentication getAuthentication() {

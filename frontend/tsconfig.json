@@ -4,11 +4,15 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@api/*": ["app/api/*"],
+      "@env/*": ["environments/*"],
       "@config/*": ["app/config/*"],
+      "@api/*": ["app/api/*"],
       "@modules/*": ["app/modules/*"],
-      "@env/*": ["environments"]
-
+      "@services/*": ["app/services/*"],
+      "@pipes/*": ["app/pipes/*"],
+      "@guards/*": ["app/guards/*"],
+      "@interceptors/*": ["app/interceptors/*"],
+      "@utils/*": ["app/utils/*"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
