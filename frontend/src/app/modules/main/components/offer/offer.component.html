@@ -1,0 +1,7 @@
+<form #saveForm="ngForm" (ngSubmit)="saveForm.valid && add()">
+  <div>
+    <label>Price</label>
+    <input required [(ngModel)]="price" type="number" name="price" class="feedback-input" placeholder="Price"/>
+  </div>
+  <input type="submit" value="SEND"/>
+</form>

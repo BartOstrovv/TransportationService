@@ -33,7 +33,7 @@ public class DeliveryController {
     }
 
     @PreAuthorize("hasRole('CUSTOMER')")
-    @PostMapping
+    @PostMapping("/create")
     public DeliveryDto create(@RequestBody DeliveryDto delivery) {
         return service.create(delivery);
     }

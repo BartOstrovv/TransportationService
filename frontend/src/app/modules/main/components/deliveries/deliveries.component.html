@@ -1,4 +1,4 @@
-<p-button>Create</p-button>
+<p-button routerLink="/deliveries/create">Create</p-button>
 <div class="card">
   <p-dataView #dataView [value]="deliveries.content" [paginator]="true" [rows]="9" filterBy="name"
               [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
@@ -25,8 +25,13 @@
             <i class="pi pi-tag delivery-category-icon"></i><span class="product-category">{{delivery.status}}</span>
           </div>
           <div class="delivery-actions">
-            <p-button label="Update" icon="pi pi-check"></p-button>
-            <p-button label="Delete" icon="pi pi-times" styleClass="p-button-secondary"></p-button>
+            <p-button *ngIf="role === 'CUSTOMER' || role === 'ADMIN'" styleClass="p-button-secondary" label="Offers" routerLink="/deliveries/{{delivery.id}}/offers"></p-button>
+            <p-button *ngIf="role === 'CUSTOMER' || role === 'ADMIN'" label="Update" icon="pi pi-check" routerLink="/deliveries/{{delivery.id}}"></p-button>
+            <p-button *ngIf="role === 'CUSTOMER' || role === 'ADMIN'"
+                      label="Delete" icon="pi pi-times" styleClass="p-button-secondary"
+                      (click)="removeDelivery(delivery)"></p-button>
+            <p-button *ngIf="role === 'TRANSPORTER'" styleClass="p-button-secondary" label="Send offer"
+            routerLink="/deliveries/{{delivery.id}}/offer"></p-button>
           </div>
         </div>
       </div>
@@ -38,8 +43,10 @@
             <p>{{delivery.description}}</p>
           </p-card>
           <div class="delivery-actions">
-            <p-button label="Update" icon="pi pi-check"></p-button>
-            <p-button label="Delete" icon="pi pi-times" styleClass="p-button-secondary"></p-button>
+            <p-button *ngIf="role === 'CUSTOMER' || role === 'ADMIN'" styleClass="p-button-secondary" label="Offers"></p-button>
+            <p-button *ngIf="role === 'CUSTOMER' || role === 'ADMIN'" label="Update" icon="pi pi-check"></p-button>
+            <p-button *ngIf="role === 'CUSTOMER' || role === 'ADMIN'" label="Delete" icon="pi pi-times" styleClass="p-button-secondary"></p-button>
+            <p-button *ngIf="role === 'TRANSPORTER'" styleClass="p-button-secondary" label="Send offer"></p-button>
           </div>
         </div>
       </div>

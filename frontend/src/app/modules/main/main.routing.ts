@@ -15,6 +15,16 @@ const routes: Routes = [
         .then(m=>m.DeliveriesModule), canActivate: [TransporterGuard]},
     {path: "deliveries/my", loadChildren: ()=>import('./components/deliveries/deliveries.component')
         .then(m=>m.DeliveriesModule), canActivate: [CustomerGuard]},
+    {path: "deliveries/create", loadChildren: ()=>import('./components/delivery/delivery.component')
+        .then(m=>m.DeliveryModule), canActivate: [CustomerGuard]},
+    {path: "deliveries/:id", loadChildren: ()=>import('./components/delivery/delivery.component')
+        .then(m=>m.DeliveryModule), canActivate: [CustomerGuard]},
+    {path: "deliveries/:id/offer", loadChildren: ()=>import('./components/offer/offer.component')
+        .then(m=>m.OfferModule), canActivate: [TransporterGuard]},
+    {path: "deliveries/:id/offers", loadChildren: ()=>import('./components/offers/offers.component')
+        .then(m=>m.OffersModule), canActivate: [CustomerGuard]},
+    {path: "transporters/:id/offers", loadChildren: ()=>import('./components/offers/offers.component')
+        .then(m=>m.OffersModule), canActivate: [TransporterGuard]},
   ]}
 ]
 

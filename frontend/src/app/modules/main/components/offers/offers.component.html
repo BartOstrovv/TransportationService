@@ -1,0 +1,8 @@
+<p-listbox [options]="offers" [(ngModel)]="selectedOffer" optionLabel="Offers" [style]="{'width':'15rem'}">
+  <ng-template class="listItem" let-offer pTemplate="item">
+    <p>Price: {{offer.price}}</p>
+    <hr/>
+    <p>Company: {{offer.transporter.logo}}</p>
+  </ng-template>
+</p-listbox>
+<p-button (onClick)="confirmSelected()">Confirm</p-button>

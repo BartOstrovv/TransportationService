@@ -1,0 +1,67 @@
+<form #saveForm="ngForm" [formGroup]="formGroup" (ngSubmit)="saveForm.valid && save()">
+  <div>
+    <label>Title</label>
+    <input required formControlName="title" type="text" class="feedback-input" placeholder="Title"/>
+  </div>
+  <div><label>Description</label>
+    <textarea required formControlName="description" class="feedback-input"
+              placeholder="Description"></textarea>
+  </div>
+  <div class="p-fluid grid formgrid">
+    <ng-container formGroupName="info">
+      <div><label>Departure Date</label>
+        <p-calendar inputId="basic" formControlName="departureDate"></p-calendar>
+      </div>
+      <div>
+        <label>Arrival Date</label>
+        <p-calendar inputId="basic" formControlName="arrivalDate"></p-calendar>
+      </div>
+      <ng-container formGroupName="departureLocation">
+      <div>
+          <label>Departure Country</label>
+          <input class="feedback-input" formControlName="country"
+                 type="text" class="feedback-input" placeholder="Departure Country"/>
+      </div>
+      <div>
+        <label>Departure City</label>
+        <input class="feedback-input" formControlName="city" required name="departureCity"
+               type="text" class="feedback-input" placeholder="Departure City"/>
+      </div>
+      <div>
+        <label>Departure Street</label>
+        <input class="feedback-input" formControlName="street" required
+               name="departureStreet"
+               type="text" class="feedback-input" placeholder="Departure Street"/>
+      </div>
+      <div>
+        <label>Departure Build</label>
+        <input formControlName="build" required name="departureBuild"
+               type="number" class="feedback-input" placeholder="Departure Build"/>
+      </div>
+    </ng-container>
+    <ng-container formGroupName="arrivalLocation">
+    <div>
+        <label>Arrival Country</label>
+        <input formControlName="country"  required name="arrivalCountry"
+               type="text" class="feedback-input" placeholder="Arrival Country"/>
+    </div>
+    <div>
+      <label>Arrival City</label>
+      <input formControlName="city" required name="arrivalCity"
+             type="text" class="feedback-input" placeholder="Arrival City"/>
+    </div>
+    <div>
+      <label>Arrival Street</label>
+      <input formControlName="street" required name="arrivalStreet"
+             type="text" class="feedback-input" placeholder="Arrival Street"/>
+    </div>
+    <div>
+      <label>Arrival Build</label>
+      <input formControlName="build" required name="arrivalBuild"
+             type="number" class="feedback-input" placeholder="Arrival Build"/>
+    </div>
+    </ng-container>
+    </ng-container>
+  </div>
+  <input type="submit" value="SAVE"/>
+</form>

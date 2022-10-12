@@ -12,6 +12,7 @@ import {DataViewModule} from "primeng/dataview";
 import {PaginatorModule} from "primeng/paginator";
 import {RestPage} from "@api/models/RestPage";
 import {RatingModule} from "primeng/rating";
+import {Role} from "@api/models/enums/Role";
 
 @Component({
   selector: 'app-deliveries',
@@ -22,10 +23,10 @@ export class DeliveriesComponent implements OnInit {
 
   //readonly DeliveryStatus = DeliveryStatus;
   deliveries: RestPage<Delivery> = new RestPage<Delivery>();
-
+  role: Role = this.securityService.getUser().role;
   sortOptions: SelectItem[] = [
-    {label: 'Title Sort ASC', value: '!price'},
-    {label: 'Title Sort DSC', value: 'price'}
+    {label: 'New first', value: '!createdDate'},
+    {label: 'Old first', value: 'createdDate'}
   ];
 
   sortKey: string = this.sortOptions[0].value
@@ -33,7 +34,7 @@ export class DeliveriesComponent implements OnInit {
   sortOrder: number = 1;
   constructor(private deliveryHttpService: DeliveryHttpService,
               private securityService: SecurityService,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute) { console.log("Sort Key is ", this.sortKey)}
 
   ngOnInit(): void {
     this.getDeliveries();
@@ -67,6 +68,19 @@ export class DeliveriesComponent implements OnInit {
         }
       });
     }
+  }
+
+
+ //REMOVE
+  removeDelivery($delivery: Delivery) {
+    this.deliveryHttpService.delete($delivery.id).pipe()
+      .subscribe({
+        next: () => {
+          //this.deliveries = this.deliveries.filter(x => x.id !== $vehicle.id);
+        },
+        error: (error) => console.error(error)
+      }
+    )
   }
 }
 
